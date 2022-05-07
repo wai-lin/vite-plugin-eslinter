@@ -1,0 +1,53 @@
+<body>
+  <section id="vite-eslinter-pop-up">
+    {{StatisticReports}}
+    <br />
+    {{LinterErrors}}
+    <br />
+    {{StatisticReports}}
+  </section>
+
+  <style>
+    #vite-eslinter-pop-up {
+      --eslinter-file-path-color: rgb(52, 52, 52);
+      --eslinter-line-column-color: gray;
+      --eslinter-severity-color: red;
+      --eslinter-message-color: rgb(52, 52, 52);
+      --eslinter-rule-id-color: gray;
+      --eslinter-statistic-reports-color: red;
+    }
+    #vite-eslinter-pop-up {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      font-size: 16px;
+      padding: 1em;
+    }
+    .eslinter-file-path {
+      text-decoration: underline;
+      color: var(--eslinter-file-path-color);
+    }
+    .eslinter-error-list {
+      padding: 0.25em 1em;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+    .eslinter-line-column {
+      color: var(--eslinter-line-column-color);
+    }
+    .eslinter-severity {
+      color: var(--eslinter-severity-color);
+    }
+    .eslinter-message {
+      color: var(--eslinter-message-color);
+    }
+    .eslinter-rule-id {
+      color: var(--eslinter-rule-id-color);
+    }
+    .eslinter-statistic-reports {
+      color: var(--eslinter-statistic-reports-color);
+    }
+  </style>
+</body>
