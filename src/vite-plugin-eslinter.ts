@@ -57,7 +57,12 @@ export interface TPluginEslinterConfig {
    * > the main `</body>` tag. So, please make sure to include the `</body>` tag
    * > in your html string.
    */
-  baseRendererUI?: (ctx: { iframeUrl: string }) => string
+  baseRendererUI?: (ctx: {
+    containerId: string
+    closeBtnId: string
+    iframeUrl: string
+    scriptTag: string
+  }) => string
 }
 
 export function pluginEslinter(
@@ -75,6 +80,18 @@ export function pluginEslinter(
 
   // linter ui container id
   const linterUiId = 'vite-eslinter-pop-up-ui'
+  const linterCloseBtnId = 'eslinter-pop-up-close-btn'
+  const linterUiScriptTag = `
+  <script>
+    function closeEslintPopUp() {
+      document.querySelector('#${linterUiId}').style.display = 'none';
+    }
+    window.onload = () => {
+      document.getElementById('${linterCloseBtnId}').removeEventListener('click', closeEslintPopUp)
+      document.getElementById('${linterCloseBtnId}').addEventListener('click', closeEslintPopUp)
+    }
+  </script>
+  `
 
   // linter html result route
   const linterHtmlRouteName = '/vite-plugin-eslinter'
@@ -259,7 +276,12 @@ export function pluginEslinter(
       return html.replace(
         '</body>',
         config.baseRendererUI
-          ? config.baseRendererUI({ iframeUrl: linterHtmlRoute })
+          ? config.baseRendererUI({
+              containerId: linterUiId,
+              closeBtnId: linterCloseBtnId,
+              iframeUrl: linterHtmlRoute,
+              scriptTag: linterUiScriptTag,
+            })
           : baseRendererUi({ linterUiId, linterHtmlRoute }),
       )
     },
