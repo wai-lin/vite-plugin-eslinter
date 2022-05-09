@@ -47,7 +47,7 @@ export interface TPluginEslinterConfig {
    * (default: `stylish` for console, `html` for browser)
    */
   formatter?: {
-    browser?: 'html' | ((lintRes: ESLint.LintResult[]) => string)
+    browser?: 'html' | ((lintRes: ESLint.LintResult[], ctx: { bodyOnLoad: string }) => string)
     console?: string
   }
   /**
@@ -90,6 +90,11 @@ export function pluginEslinter(
       document.getElementById('${linterCloseBtnId}').removeEventListener('click', closeEslintPopUp)
       document.getElementById('${linterCloseBtnId}').addEventListener('click', closeEslintPopUp)
     }
+    function resizeIFrame(iframeHeight) {
+      const newHeight = parseInt(iframeHeight, 10) + 50;
+      document.querySelector('#${linterUiId} iframe').style.height = newHeight + 'px';
+      document.querySelector('#${linterUiId}').style.height = newHeight + 50 + 'px';
+    }
   </script>
   `
 
@@ -129,7 +134,7 @@ export function pluginEslinter(
   async function setBrowserLintResult() {
     lintResultBrowser =
       typeof browserFormatter === 'function'
-        ? browserFormatter(linterResultsRaw)
+        ? browserFormatter(linterResultsRaw, { bodyOnLoad: 'onload="parent.resizeIFrame(document.body.scrollHeight)"' })
         : await eslinterFormatter(eslint, linterResultsRaw, {
             formatter: browserFormatter,
           })

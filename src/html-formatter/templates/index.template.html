@@ -1,53 +1,66 @@
-<body>
-  <section id="vite-eslinter-pop-up">
-    {{StatisticReports}}
-    <br />
-    {{LinterErrors}}
-    <br />
-    {{StatisticReports}}
-  </section>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite Plugin ESLinter - HTML Formatter</title>
+    <style>
+      body {
+        font-family: Courier, monospace;
+        font-size: 16px;
+      }
+      #vite-eslinter-pop-up {
+        --color-red: #f87171;
+        --color-white: #ffffff;
+        --color-gray: #a8a29e;
+        --color-black: #292524;
 
-  <style>
-    #vite-eslinter-pop-up {
-      --eslinter-file-path-color: rgb(52, 52, 52);
-      --eslinter-line-column-color: gray;
-      --eslinter-severity-color: red;
-      --eslinter-message-color: rgb(52, 52, 52);
-      --eslinter-rule-id-color: gray;
-      --eslinter-statistic-reports-color: red;
-    }
-    #vite-eslinter-pop-up {
-      position: absolute;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      font-size: 16px;
-      padding: 1em;
-    }
-    .eslinter-file-path {
-      text-decoration: underline;
-      color: var(--eslinter-file-path-color);
-    }
-    .eslinter-error-list {
-      padding: 0.25em 1em;
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-    }
-    .eslinter-line-column {
-      color: var(--eslinter-line-column-color);
-    }
-    .eslinter-severity {
-      color: var(--eslinter-severity-color);
-    }
-    .eslinter-message {
-      color: var(--eslinter-message-color);
-    }
-    .eslinter-rule-id {
-      color: var(--eslinter-rule-id-color);
-    }
-    .eslinter-statistic-reports {
-      color: var(--eslinter-statistic-reports-color);
-    }
-  </style>
-</body>
+        --eslinter-file-path-color: var(--color-white);
+        --eslinter-error-list-item-color: var(--color-white);
+        --eslinter-line-column-color: var(--color-gray);
+        --eslinter-severity-color: var(--color-red);
+        --eslinter-message-color: var(--color-white);
+        --eslinter-rule-id-color: var(--color-gray);
+        --eslinter-statistic-reports-color: var(--color-red);
+      }
+      .eslinter-file-path {
+        text-decoration: underline;
+        color: var(--eslinter-file-path-color);
+      }
+      .eslinter-error-list {
+        padding: 0.25em 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+      }
+      .eslinter-error-list-item {
+        color: var(--eslinter-error-list-item-color);
+      }
+      .eslinter-line-column {
+        color: var(--eslinter-line-column-color);
+      }
+      .eslinter-severity {
+        color: var(--eslinter-severity-color);
+      }
+      .eslinter-message {
+        color: var(--eslinter-message-color);
+      }
+      .eslinter-rule-id {
+        color: var(--eslinter-rule-id-color);
+      }
+      .eslinter-statistic-reports {
+        color: var(--eslinter-statistic-reports-color);
+      }
+    </style>
+  </head>
+  <body onload="parent.resizeIFrame(document.body.scrollHeight)">
+    <section id="vite-eslinter-pop-up">
+      {{StatisticReports}}
+      <br />
+      {{LinterErrors}}
+      <br />
+      {{StatisticReports}}
+    </section>
+  </body>
+</html>
