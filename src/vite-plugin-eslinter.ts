@@ -91,8 +91,10 @@ export function pluginEslinter(
       document.getElementById('${linterCloseBtnId}').addEventListener('click', closeEslintPopUp)
     }
     function resizeIFrame(iframeHeight) {
+      const bodyHeight = document.body.scrollHeight
       const newHeight = parseInt(iframeHeight, 10) + 50;
       document.querySelector('#${linterUiId} iframe').style.height = newHeight + 'px';
+      if (bodyHeight < newHeight)
       document.querySelector('#${linterUiId}').style.height = newHeight + 50 + 'px';
     }
   </script>
